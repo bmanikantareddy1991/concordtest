@@ -2,17 +2,9 @@ flows:
   default:
     - form:
         name: stageForm
-        elements:
-          - select:
-              name: stage
-              label: Select Stage
-              options:
-                - int
-                - stg
-                - prod
     - script: groovy
       body: |
-        def stage = form['stageForm']['stage']
+        def stage = form['stageForm']['environment']
 
         println "Selected stage: $stage"
 
@@ -25,4 +17,4 @@ flows:
         }
 forms:
   stageForm:
-  - stage: {type: "string", label: "stage name"}
+  - environment: { label: "environment type", type: "string", allow: ["int", "stage", "prod"] }
