@@ -12,7 +12,7 @@ flows:
                 - prod
     - script: groovy
       body: |
-        def stage = ${stageForm.stage}
+        def stage = form['stageForm']['stage']
 
         println "Selected stage: $stage"
 
