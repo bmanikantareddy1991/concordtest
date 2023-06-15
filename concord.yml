@@ -25,5 +25,4 @@ flows:
         }
 forms:
   stageForm:
-  # the secret's password
   - stage: {type: "string", label: "stage name"}
