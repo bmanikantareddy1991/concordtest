@@ -23,3 +23,7 @@ flows:
         } else if (stage == 'prod') {
             println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
         }
+forms:
+  stageForm:
+  # the secret's password
+  - stage: {type: "string", label: "stage name"}
