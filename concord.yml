@@ -1,34 +1,8 @@
-version: "2.1"
-
-metadata:
-  version: "1.0"
-
 flows:
   default:
-    - form:
-        name: stageForm
-        onsubmit:
-          - script: groovy
-            body: |
-              def stage = execution.variables['stageForm']['environment']
+  - docker: library/alpine
+    cmd: echo "Hello, ${name}"
 
-              println "Selected stage: $stage"
-
-              if (stage == 'int') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              } else if (stage == 'stg') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              } else if (stage == 'prod') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              }
-
-forms:
-  stageForm:
-    fields:
-      - name: environment
-        label: "Environment Type"
-        type: "string"
-        options:
-          - "int"
-          - "stage"
-          - "prod"
+configuration:
+  arguments:
+    name: "world"
