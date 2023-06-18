@@ -1,13 +1,11 @@
-version: "1"
-
 flows:
-  - name: "Shell Script Flow"
+  default:
     triggers:
-      - name: "Manual Trigger"
-        eventSource: "manual"
+      - eventSource: "manual"
+        name: "Manual Trigger"
     steps:
       - name: "Execute Shell Script"
-        taskRef: "shell"
+        task: "shell"
         in:
           cmd: |
             #!/bin/bash
