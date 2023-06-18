@@ -10,8 +10,7 @@ flows:
         echo "First command"
         echo "Second command"
         echo "Third command"
-        ls /data
-        ls /workspace
+        ls -lR /tmp
 
 
 configuration:
