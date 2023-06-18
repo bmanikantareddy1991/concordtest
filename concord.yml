@@ -1,20 +1,17 @@
+version: "1"
+
 flows:
-  default:
-    - form:
-        name: stageForm
-    - script: groovy
-      body: |
-        def stage = form['stageForm']['environment']
+  - name: "Shell Script Flow"
+    triggers:
+      - name: "Manual Trigger"
+        eventSource: "manual"
+    steps:
+      - name: "Execute Shell Script"
+        taskRef: "shell"
+        in:
+          cmd: |
+            #!/bin/bash
+            echo "Hello, Walmart Concord!"
+            echo "This is a shell script execution."
+            echo "You can add your own commands and logic here."
 
-        println "Selected stage: $stage"
-
-        if (stage == 'int') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        } else if (stage == 'stg') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        } else if (stage == 'prod') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        }
-forms:
-  stageForm:
-  - environment: { label: "environment type", type: "string", allow: ["int", "stage", "prod"] }
