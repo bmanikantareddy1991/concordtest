@@ -1,13 +1,9 @@
 flows:
   default:
-    - task: "docker"
-      name: "Run Shell Script in Docker"
-      in:
-        image: "library/alpine"
-        cmd: |
-          /bin/sh -c 'echo "Hello, ${name}"'
+  - docker: library/alpine
+    cmd: |
+      /bin/sh -c 'echo "Hello, ${name}"'
 
 configuration:
   arguments:
     name: "world"
-
