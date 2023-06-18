@@ -10,7 +10,7 @@ flows:
         echo "First command"
         echo "Second command"
         echo "Third command"
-        ls -lR /tmp
+        ls -l /tmp
 
 
 configuration:
