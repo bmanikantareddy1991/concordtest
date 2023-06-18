@@ -1,7 +1,6 @@
 flows:
   default:
-  - task: "shell"
-    name: "Run Shell Script"
+  - task: shell
     in:
       script: |
         #!/bin/bash
