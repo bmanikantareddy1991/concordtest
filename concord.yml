@@ -1,8 +1,10 @@
 flows:
   default:
-  - task: shell
-    in:
-      script: |
+  - task:
+      name: "Run Shell Script"
+      in:
+        type: "shell"
+        script: |
         #!/bin/bash
         echo "Hello, Concord!"
         echo "This is a shell script execution."
