@@ -10,7 +10,7 @@ flows:
         onsubmit:
           - script: groovy
             body: |
-              def stage = form['stageForm']['environment']
+              def stage = execution.variables['stageForm']['environment']
 
               println "Selected stage: $stage"
 
