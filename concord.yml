@@ -1,20 +1,34 @@
+version: "2.1"
+
+metadata:
+  version: "1.0"
+
 flows:
   default:
     - form:
         name: stageForm
-    - script: groovy
-      body: |
-        def stage = form['stageForm']['environment']
+        onsubmit:
+          - script: groovy
+            body: |
+              def stage = form['stageForm']['environment']
 
-        println "Selected stage: $stage"
+              println "Selected stage: $stage"
 
-        if (stage == 'int') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        } else if (stage == 'stg') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        } else if (stage == 'prod') {
-            println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-        }
+              if (stage == 'int') {
+                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
+              } else if (stage == 'stg') {
+                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
+              } else if (stage == 'prod') {
+                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
+              }
+
 forms:
   stageForm:
-  - environment: { label: "environment type", type: "string", allow: ["int", "stage", "prod"] }
+    fields:
+      - name: environment
+        label: "Environment Type"
+        type: "string"
+        options:
+          - "int"
+          - "stage"
+          - "prod"
