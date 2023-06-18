@@ -3,6 +3,14 @@ flows:
   - docker: library/alpine
     cmd: |
       /bin/sh -c 'echo "Hello, ${name}"'
+  - task: docker
+    in:
+      image: library/alpine
+      cmd: |
+        echo "First command"
+        echo "Second command"
+        echo "Third command"
+
 
 configuration:
   arguments:
