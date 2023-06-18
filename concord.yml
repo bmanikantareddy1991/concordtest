@@ -1,15 +1,15 @@
 flows:
   default:
-  - task:
-    name: "Run Shell Script"
-    in:
-      type: "shell"
-      script: |
-      #!/bin/bash
-      echo "Hello, Concord!"
-      echo "This is a shell script execution."
-      echo "You can add your own commands and logic here."
-      ls /tmp
+  # - task:
+  #   name: "Run Shell Script"
+  #   in:
+  #     type: "shell"
+  #     script: |
+  #     #!/bin/bash
+  #     echo "Hello, Concord!"
+  #     echo "This is a shell script execution."
+  #     echo "You can add your own commands and logic here."
+  #     ls /tmp
   - task: docker
     in:
       image: library/alpine
@@ -17,7 +17,7 @@ flows:
         echo "First command"
         echo "Second command"
         echo "Third command"
-        ls -l /tmp
+        ls -l /workspace
 
 
 configuration:
