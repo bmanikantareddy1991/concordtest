@@ -1,34 +1,27 @@
-version: "2.1"
+configuration:
+  arguments:
+    input_data: "This is some input data"
 
-metadata:
-  version: "1.0"
+forms:
+  form1:
+    fields:
+      - dropdown:
+        name: input_data
+        options: ["Option 1", "Option 2", "Option 3"]
 
 flows:
   default:
-    - form:
-        name: stageForm
-        onsubmit:
-          - script: groovy
-            body: |
-              def stage = execution.variables['stageForm']['environment']
-
-              println "Selected stage: $stage"
-
-              if (stage == 'int') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              } else if (stage == 'stg') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              } else if (stage == 'prod') {
-                println "path: Prod/genvault/secret/adtech-infra-team/prod/team/infra/databases/generic/$stage/infra_root"
-              }
-
-forms:
-  stageForm:
-    fields:
-      - name: environment
-        label: "Environment Type"
-        type: "string"
-        options:
-          - "int"
-          - "stage"
-          - "prod"
+    # Get the input data from the form.
+    - expr: ${form1.input_data}
+    # Pass the input data to the task for processing.
+    - task: my_task
+      in:
+        input_data: ${expr}
+    # Get the output data from the task.
+    - expr: ${my_task.output_data}
+    # Display the output data as a dropdown input field in the form.
+    - form: form2
+      fields:
+        - dropdown:
+          name: output_data
+          options: ${expr}
