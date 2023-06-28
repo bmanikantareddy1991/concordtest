@@ -1,27 +1,26 @@
-configuration:
-  arguments:
-    input_data: "This is some input data"
-
-forms:
-  form1:
-    fields:
-      - dropdown:
-        name: input_data
-        options: ["Option 1", "Option 2", "Option 3"]
-
 flows:
   default:
-    # Get the input data from the form.
-    - expr: ${form1.input_data}
-    # Pass the input data to the task for processing.
-    - task: my_task
-      in:
-        input_data: ${expr}
-    # Get the output data from the task.
-    - expr: ${my_task.output_data}
-    # Display the output data as a dropdown input field in the form.
-    - form: form2
-      fields:
-        - dropdown:
-          name: output_data
-          options: ${expr}
+  # - task:
+  #   name: "Run Shell Script"
+  #   in:
+  #     type: "shell"
+  #     script: |
+  #     #!/bin/bash
+  #     echo "Hello, Concord!"
+  #     echo "This is a shell script execution."
+  #     echo "You can add your own commands and logic here."
+  #     ls /tmp
+  - task: docker
+    in:
+      image: library/alpine
+      cmd: |
+        echo "First command"
+        echo "Second command"
+        echo "Third command"
+        ls -l /data
+        cat /data/test
+      volumes:
+      - "/tmp/data:/data"  
+configuration:
+  arguments:
+    name: "world"
